@@ -40,7 +40,9 @@ c. File presentasi, terdapat informasi mengenai:
      Referensi
 ```
 
-## CARA CONFIGURASI GITHUB
+#### Presentasi akan dilakukan pada saat UAS Praktikum
+
+#### CARA CONFIGURASI GITHUB
 ```
 1. Install Git bash
 2. Buat directory lokal
