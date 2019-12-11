@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575988792200.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3489053617",
+    "id" : "ED819C26",
+    "lastKnownWriteTime" : 1576091547,
+    "last_content_update" : 1576091547538,
+    "path" : "~/Tugas Besar Data Mining/Rstudio/clustering hirarki.R",
+    "project_path" : "clustering hirarki.R",
+    "properties" : {
+        "cursorPosition" : "25,14",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

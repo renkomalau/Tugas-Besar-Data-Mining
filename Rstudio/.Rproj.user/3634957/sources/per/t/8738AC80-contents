@@ -1,0 +1,278 @@
+---
+title: "Clustering"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+author: Jayavarshini Ilarajan, 
+        Illinois Institute of Technology
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### Kmeans
+```{r cars}
+rm(list =ls())
+#install.packages("factoextra")
+#install.packages("NbClust")
+library(cluster)
+library(factoextra)
+library(dplyr)
+library(NbClust)
+setwd("/Users/jayavarshini/Desktop/ms/sem1/dmm/Assing3/")
+data_buddy_move <- read.csv("buddymove_holidayiq.csv", header=T, sep=",", comment.char = '#')
+head(data_buddy_move)
+```
+```{r}
+buddy_move=data_buddy_move[,2:7]
+head(buddy_move)
+```
+
+```{r}
+#Applying basic statistics before applying k means to check to apply standardization or not. 
+stats<- data.frame(
+  Min = apply(buddy_move, 2, min), # minimum
+  Med = apply(buddy_move, 2, median), # median
+  Mean = apply(buddy_move, 2, mean), # mean
+  SD = apply(buddy_move, 2, sd), # Standard deviation
+  Max = apply(buddy_move, 2, max)
+)
+stats <- round(stats, 1)
+head(stats)
+```
+The minimum and maximum of sports value is much less than the rest, So I'm scaling the data. 
+
+```{r}
+x<-scale(buddy_move)
+head(x)
+```
+```{r}
+stats<- data.frame(
+  Min = apply(x, 2, min), # minimum
+  Med = apply(x, 2, median), # median
+  Mean = apply(x, 2, mean), # mean
+  SD = apply(x, 2, sd), # Standard deviation
+  Max = apply(x, 2, max)
+)
+stats <- round(stats, 1)
+head(stats)
+```
+
+#### a
+```{r}
+# Initializing total within sum of squares error: wss
+wss <- 0
+
+# For 1 to 15 cluster centers
+for (i in 1:15) {
+  kmn <- kmeans(x, centers = i, nstart = 20)
+  # Saving the total within sum of squares to wss variable
+  wss[i] <- kmn$tot.withinss
+}
+
+# Plot total within sum of squares vs. number of clusters
+plot(1:15, wss, type = "b", 
+     xlab = "Number of Clusters", 
+     ylab = "Within groups sum of squares")
+
+
+```
+The plot has an elbow where the quality measure improves more slowly as the number of clusters increases which shows the quality of the of the model is no longer improving substantially as the model complexity increases. 
+
+
+Also to do it using fviz_nbclust() easily:
+
+```{r}
+
+# How many clusters?  A couple of means to visuzalize it.
+fviz_nbclust(x, kmeans, method="wss") # Elbow method minimizes total
+# within-cluster sum of squares (wss).  Also called a "Scree" plot.
+
+# Silhouette measures the quality of a cluster, i.e., how well each 
+# point lies within its cluster.
+fviz_nbclust(x, kmeans, method="silhouette")
+```
+```{r}
+k <- 3
+kmean=kmeans(x,centers = 3,nstart = 25)
+```
+#### Part b
+```{r}
+fviz_cluster(kmean, data=x)
+```
+#### Part c
+Number of observations in each cluster 
+```{r}
+kmean$size
+```
+
+#### Part d
+Total SSE of the clusters 
+```{r}
+print(kmean$tot.withinss)
+```
+#### Part e
+SSE of each cluster 
+```{r}
+print(kmean$withinss)
+
+```
+#### Part f
+```{r}
+for(i in 1:3)
+{
+  print(i)
+  print(which(kmean$cluster==i))
+}
+```
+
+In cluster one, the users who has given more reviews about nature and picnic are clustered together. It is obvious that people enjoy nature prefer to spend more time with family having picnics. 
+For instance, for cluster points 73,84,94 the nature and picnic values are high than the rest. So they are clustered together. 
+
+
+In cluster two, Something I found out interesting was the users who rated can be mothers/women of the family. I say so because the ratings on Religious,Shopping and Picnic are specifically high. 
+
+
+In cluster three, the sports ratings play a role. If we can see the clusters more in detail, we can find the users who prefer watching movies and sports on tv than outdoors. 
+
+### Hierarchical clustering  
+```{r}
+set.seed(1122)
+setwd("/Users/jayavarshini/Desktop/ms/sem1/dmm/Assing3/")
+DataSet <- read.csv("buddymove_holidayiq.csv", header=T, sep=",", comment.char = '#')
+DataSet
+SubSet<-sample_n(DataSet, 50)
+rownames(SubSet)<-SubSet$User.Id
+SubSet<-SubSet[2:7]
+SubSet
+```
+```{r}
+x<-scale(SubSet)
+head(x)
+```
+#### Part a
+Complete Linakge 
+```{r}
+complete_linkage<- eclust(x, "hclust", hc_method = "complete",k=1)
+```
+
+```{r}
+fviz_dend(complete_linkage, show_labels=T, palette="jco")
+```
+The number of singleton clusters: 19
+
+
+```{r}
+single_linkage<- eclust(x, "hclust", hc_method = "single",k=1)
+
+```
+
+```{r}
+fviz_dend(single_linkage, show_labels=T, palette="jco",main='Single Linkage')
+```
+The number of singleton custer pairs:15
+```{r}
+average_linkage<- eclust(x ,"hclust", hc_method ="average",k=1)
+``` 
+
+```{r}
+fviz_dend(average_linkage ,show_labels=T,palette="jco", main='Average Linkage')
+```
+
+The total number of singleton cluster pairs 18
+```{r}
+```
+#### Part b
+Complete Linkage: 
+The number of singleton clusters: 19
+
+{User 71,User 98},{User 12,User 11},{User 72,User 73},{User 115,User 56},{User 18 ,User 41},{User 23,User 58},{User 43,User 35},{User 36,User 60},{User 4,User 37},{User 200,User 195},{User 199,User 168},{User 197,User 217},{User 224,User 221},{User 167,User 240},{User 140,User 145},{User 155,User 136},{User 170,User 225},{User 157,User 131},{User 116,User 139}
+
+Single Linkage:
+The number of singleton custer pairs:15
+
+{User 200,User 195},{User 224,User 221},{User 167 ,User 240},{User 71,User 98},{User 12,User 11},{User 18,User 41},{User 23,User 38},{User 43,User 35},{User 157,User 131},{User 116,User 139},{User 40,User 45},{User 140,User 145},{User155 ,User 136},{User 197 ,User 217},{User 199,User 168}
+
+
+Average Linkage:
+The total number of singleton cluster pairs 18
+{User 12,User 11},{User 43,User 35},{User 36,User 60},{User 4,User 37},{User 72,User 73},{User 18,User 41},{User 23,User 38},{User 71,User 98},{User 140,User 145},{User ,155User 136},{User 157,User 131},{User 116,User 139},{User 200,User 195},{User 224,User 221},{User 167,User 240},{User 197,User 217},{User 170,User 225},{User 199,User 168}
+
+```{r}
+```
+#### Part c
+According to the assumption I take, the single linkage has the smallest number of singleton pairs and I consider the purest. 
+```{r}
+```
+#### Part d
+```{r}
+#cutree(single_linkage,)
+cutree(single_linkage,h=1.7)
+plot(single_linkage)
+abline(h=1.7,col="red")
+```
+
+Im getting 3 clusters at height 1.7
+#### Part e
+```{r} 
+complete_linkage2<- eclust(x, "hclust", hc_method = "complete",k=3)
+fviz_dend(complete_linkage2, show_labels=T, palette="jco")
+
+```
+
+```{r}
+single_linkage2<- eclust(x, "hclust", hc_method = "single",k=3)
+fviz_dend(single_linkage2, show_labels=T, palette="jco")
+```
+
+```{r}
+average_linkage2<- eclust(x, "hclust", hc_method  = "average",k=3)
+fviz_dend(average_linkage2, show_labels=T, palette="jco")
+```
+Silhouette index for all types of linkage. 
+```{r}
+complete_statastics <- fpc::cluster.stats(dist(x), complete_linkage2$cluster)
+complete_statastics$avg.silwidth 
+```
+
+```{r}
+single_statastics <- fpc::cluster.stats(dist(x), single_linkage2$cluster)
+single_statastics$avg.silwidth 
+
+```
+
+```{r}
+average_statastics <- fpc::cluster.stats(dist(x), average_linkage2$cluster)
+average_statastics$avg.silwidth 
+```
+ACcording to the average silhoutte index, the complete linakge is the best. 
+#### Part f
+```{r}
+NbClust(x,method = "complete")
+```
+```{r}
+NbClust(x,method = "single")
+```
+
+```{r}
+NbClust(x,method = "average")
+```
+#### Part g
+```{r}
+plot(silhouette(cutree(complete_linkage2,3),dist(x)))
+
+```
+
+```{r}
+plot(silhouette(cutree(single_linkage2,3),dist(x)))
+
+```
+
+```{r}
+plot(silhouette(cutree(average_linkage2,5),dist(x)))
+```
+#### Part h
+The one based on purity./lowest number of singleton nodes gives us single_linkage to be the best and . The clustering performed with nb clust gave us good silhoutte index for complete_linkage. And we can see in the plot, the nb clust gave a elbow shaped drop in 3 clusters for complete and 3 for single and 5 for average. 
+The higher the silhoute index,the good structure is present for the clusters. 
+
+I think the Complete linkage will be suit for the dataset, since it clusters properly and gives us a higher good structure. 

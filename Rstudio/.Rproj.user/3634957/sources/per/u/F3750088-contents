@@ -1,0 +1,14 @@
+seleksi <- data_buddy_move
+seleksi$User.Id <- NULL
+
+#Result cluster
+result <- kmeans(seleksi, 4)
+result
+result$cluster
+
+#membuat tabel cluster
+table(data_buddy_move$User.Id, result$cluster)
+
+#visualisasi cluster
+plot(data_buddy_move[c("Sports","Religious","Nature","Theatre","Shopping",
+                       "Picnic")], col=result$cluster)

@@ -1,0 +1,48 @@
+#lokasi_directory
+wd <- "H:/Tugas_Besar_Kelompok_4"
+setwd (wd)
+getwd()
+
+#Memasukkan dataset tugas kami
+dataset <- read.csv("buddymove_holidayiq.csv" , header = TRUE, sep = ",")
+#Seleksi dataset dari kolom 2-7
+input=dataset[,2:7]
+install.packages("tidyverse")
+install.packages("gridExtra")
+install.packages("ggplot2")
+install.packages("cluster")
+
+library(cluster)
+library(ggplot2)
+library(factoextra)
+library(tidyverse)
+library(gridExtra)
+
+#Melihat jumlah cluster yang ideal
+fviz_nbclust(input,kmeans,method = "silhouette")
+
+#Terlebih dahulu membuat variable kmeans nya
+k3 <- kmeans(input,center=3,nstart = 25)
+
+fviz_cluster(k3, geom = "point", data = input)+ggtitle("Data Libur jika dibagi 3 cluster")
+
+#Melihat summary dari variable K3
+k3
+
+#Menginstal package Dependence
+install.packages("colorspace")
+install.packages("maggritr")
+library(colorspace)
+library(magrittr)
+
+#scaling dataset di cluster nya
+sc <- input %>% scale() %>% dist(method = "euclidean") %>% hclust(method = "ward.D2")
+#Melihat model
+sc
+
+#membuat model virtual
+fviz_dend(sc,k=3,
+          cex = 0.5,
+          k_colors = c("#00AFBB","#FC4E07","#2E9FDF"),
+          color_labels_by_k = TRUE,
+          rect = TRUE)

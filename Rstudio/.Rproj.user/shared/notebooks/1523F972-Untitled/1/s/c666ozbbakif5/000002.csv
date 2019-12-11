@@ -1,0 +1,29 @@
+"0","rm(list =ls())"
+"0","#install.packages(""factoextra"")"
+"0","#install.packages(""NbClust"")"
+"0","library(cluster)"
+"0","library(factoextra)"
+"2","Loading required package: ggplot2
+"
+"2","Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa
+"
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(NbClust)"
+"0","setwd(""/Users/jayavarshini/Desktop/ms/sem1/dmm/Assing3/"")"
+"2","Error in setwd(""/Users/jayavarshini/Desktop/ms/sem1/dmm/Assing3/"") : 
+  cannot change working directory
+"

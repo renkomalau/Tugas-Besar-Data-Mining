@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575963567027.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4D9C9F9C",
+    "lastKnownWriteTime" : 1575889897,
+    "last_content_update" : 1575963567027,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "DFE3A82B",
+        "caption" : "fires",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=fires&cache_key=DFE3A82B",
+        "displayedObservations" : 6454,
+        "environment" : "",
+        "expression" : "fires",
+        "object" : "fires",
+        "preview" : 0,
+        "totalObservations" : 6454,
+        "variables" : 5
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

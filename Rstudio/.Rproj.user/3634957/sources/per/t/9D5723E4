@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575996389732.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9D5723E4",
+    "lastKnownWriteTime" : 3418066522385707890,
+    "last_content_update" : 1575996389732,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "c07ceef7945d487493f3c90f16167c2c",
+        "name" : "kmn",
+        "title" : "kmn"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

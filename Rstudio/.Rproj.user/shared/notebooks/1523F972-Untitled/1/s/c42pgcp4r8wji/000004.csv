@@ -1,0 +1,4 @@
+"0","complete_linkage<- eclust(x, ""hclust"", hc_method = ""complete"",k=1)"
+"2","Error in eclust(x, ""hclust"", hc_method = ""complete"", k = 1) : 
+  object 'x' not found
+"

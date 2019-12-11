@@ -1,0 +1,34 @@
+#set and get location
+getwd()
+setwd("C:/Users/renko/OneDrive/Documents/Tugas Besar Data Mining/Rstudio")
+
+#Importing library packages
+install.packages("tidyverse")
+install.packages("extrafont")
+install.packages("lubridate")
+install.packages("data.table")
+install.packages("scales")
+library(tidyverse)
+library(extrafont)
+library(lubridate)
+library(data.table)
+library(scales)
+
+#Reading the file
+fires <- read.csv("amazon.csv")
+View(fires)
+str(fires)
+
+#Re-naming months in English from Portuguese
+fires2 <- fires %>% mutate(month = if_else(month == "Abril", "April", if_else(month == "Agosto", "August", if_else(month == "Dezembro", "December", if_else(month == "Fevereiro", "February", if_else(month == "Janeiro", "January", if_else(month == "Julho", "July", if_else(month == "Junho", "June", if_else(month == "Maio", "May", if_else(month == "Setembro", "September", if_else(month == "Novembro", "November", if_else(month == "Outubro", "October", "Mar"))))))))))))
+
+#Forest fires analysis by month
+table(fires2$month)
+
+#Forest fires analysis by year
+table(fires2$year)
+
+#Forest fires analysis by state
+table(fires2$state)
+
+fires2 %>% ggplot(aes(number)) + geom_histogram(fill = "red") + geom_vline(xintercept = median(fires2number),color="blue")+geomvline(xintercept=mean(fires2number), color = "green") + xlab("Number of Fires") + ylab("Frequency") + ggtitle("Forest fire distribution from 1998 to 2017") + theme(title = element_text(family = "Luminari"))

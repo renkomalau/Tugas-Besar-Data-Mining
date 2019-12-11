@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575985968741.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3562053118",
+    "id" : "DE2FDEA7",
+    "lastKnownWriteTime" : 1576091575,
+    "last_content_update" : 1576091575134,
+    "path" : "~/Tugas Besar Data Mining/Rstudio/clustering kmeans.R",
+    "project_path" : "clustering kmeans.R",
+    "properties" : {
+        "cursorPosition" : "55,1",
+        "docOutlineVisible" : "0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

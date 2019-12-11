@@ -1,0 +1,7 @@
+"0","{
+  print(i)
+  print(which(kmean$cluster==i))
+}
+"
+"2","Error in print(i) : object 'i' not found
+"
